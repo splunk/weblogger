@@ -31,4 +31,4 @@ Yes however there a few issues with this package.
 * No official Splunk support.
 * Not actively maintained.
 * Dependancies have been marked as deprecated.
-* Most importantly, it will not work in browsers.
+* Most importantly, it **will not work in browsers**.
