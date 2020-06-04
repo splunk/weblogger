@@ -32,4 +32,4 @@ Yes however there a few issues with this package.
 * Works in latest version of all browsers.
 * Small file size, lightweight on resources, and free of external dependences.
 * Use `SharedWorker` where available to limit open connections to splunk.
-* Support [RFCrfc5424](https://tools.ietf.org/html/rfc5424) logging levels.
+* Support [RFC5424](https://tools.ietf.org/html/rfc5424) logging levels.
