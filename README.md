@@ -9,7 +9,7 @@ Splunk logging for the web.
 * Works in latest version of all browsers.
 * Small file size, lightweight on resources, and free of external dependences.
 * Use SharedWorker where available to limit open connections to Splunk.
-* Support for all RFC5424 logging levels.
+* Support for all [RFC5424](https://tools.ietf.org/html/rfc5424) logging levels.
 
 ## Usage
 
