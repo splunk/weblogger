@@ -5,7 +5,7 @@ Splunk logging for the web.
 ## Usage
 
 ```js
-const WebLogger = import '@splunk/weblogger'
+import WebLogger from '@splunk/weblogger'
 const webLogger({
   url: MY_SPLUNK_URL,
   token: MY_TOKEN,
