@@ -11,14 +11,13 @@ Splunk logging for the web.
 * Use SharedWorker where available to limit open connections to Splunk.
 * Support for all [RFC5424](https://tools.ietf.org/html/rfc5424) logging levels.
 
-## Usage
+## Proposed Usage
 
 ```js
 import WebLogger from '@splunk/weblogger'
-const webLogger({
-  url: MY_SPLUNK_URL,
-  token: MY_TOKEN,
-  sendDebug: true,
+const weblogger = new WebLogger({
+  url: SPLUNK_URL,
+  token: SPLUNK_TOKEN,
 })
 webLogger.error(Error('help!'))
 webLogger.warn({ issue: 'jankDetected', item: '#my-button' })
