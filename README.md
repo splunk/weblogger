@@ -26,7 +26,7 @@ webLogger.info({ action: 'user_logged_in', username: 'steve' })
 webLogger.debug({ firstPaintDuration: 100 })
 ```
 
-## Doesn't [splunk-library-javalogging](https://github.com/splunk/splunk-library-javalogging) already do this?
+## Doesn't [splunk-javascript-logging](https://github.com/splunk/splunk-javascript-logging) already do this?
 Yes however there a few issues with this package.
 * No official Splunk support.
 * Not actively maintained.
