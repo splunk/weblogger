@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ES2019",
     "rootDir": "src",
-    "outDir": "build",
+    "outDir": "dist",
     "declaration": true
   }
 }

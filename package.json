@@ -1,7 +1,7 @@
 {
-  "name": "@splunk/weblogger",
-  "version": "0.9.0",
-  "main": "index.js",
+  "name": "wl-001",
+  "version": "0.9.13",
+  "main": "WebLogger.js",
   "description": "Splunk logging for the web.",
   "author": "Splunk Inc.",
   "license": "Apache-2.0",
@@ -15,7 +15,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "",
+    "build": "npx tsc",
+    "pack": "mkdir -p dist && cp package.json dist/package.json && npm pack ./dist",
+    "pub": "npm publish $(node -p \"p=require('./package.json');p.name+'-'+p.version+'.tgz'\")",
     "lint": "npx eslint ./src/**",
     "lint-fix": "npx eslint --fix ./src/**",
     "format": "npx prettier --check ./src/**",
