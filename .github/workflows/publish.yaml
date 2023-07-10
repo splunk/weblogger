@@ -1,0 +1,70 @@
+name: "Build"
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  build:
+    if: |
+      github.event.pull_request.merged == true &&
+      contains(join(github.event.pull_request.labels.*.name), 'release/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      - run: npm install
+
+      - name: Get release version
+        uses: actions/github-script@v6
+        id: version
+        with:
+          result-encoding: string
+          script: |
+            const semver = require("semver");
+            const labels = ${{ toJson(github.event.pull_request.labels.*.name) }};
+            const label = labels.find((label) => label.startsWith("release/"));
+            const [,release] = label.split("/", 2);
+            const result = await github.rest.repos.getRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: "latest",
+            });
+            const version = semver.inc(result.data.tag_name, release);
+            if (!version) {
+              throw Error("Release version could not be generated");
+            }
+            return version;
+
+      - name: Bump version
+        run: |
+          npm version ${{ steps.version.outputs.result }} --git-tag-version=false
+
+      - name: Commit release branch
+        run: |
+          git config user.name 'github-action'
+          git config user.email 'github-actions@github.com'
+          git add -A
+          git commit -m '${{ steps.version.outputs.result }}'
+          git checkout -b '${{ steps.version.outputs.result }}'
+          git push origin HEAD
+
+      - name: Create release
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const version = "${{ steps.version.outputs.result }}";
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: version,
+              tag_name: version,
+              prerelease: version.includes("-"),
+            });

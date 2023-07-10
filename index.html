@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="module">
+        import WebLogger from './esm/WebLogger.js'
+
+        const wl = new WebLogger({
+            origin: 'http://localhost:8088',
+            token: '7f4b2cc9-ed83-4da5-b19d-11dac407926a',
+        })
+
+        globalThis.addEventListener('DOMContentLoaded', () => {
+            const button = document.querySelector('button')
+            button.addEventListener('click', (evt) => {
+                wl.log({ value: Math.random().toString(36).slice(2) })
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <button>Send</button>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script>
+        addEventListener('DOMContentLoaded', () => {
+            const url = 'http://localhost:8088/'
+            const input = document.querySelector('input')
+
+            addEventListener("pagehide", () => {
+                navigator.sendBeacon(url, JSON.stringify({
+                    source: 'pagehide',
+                    value: input.value,
+                }));
+            });
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.visibilityState === "hidden") {
+                    navigator.sendBeacon(url, JSON.stringify({
+                        source: 'visibilitychange',
+                        value: input.value,
+                    }));
+                }
+            });
+
+            setInterval(() => {
+                navigator.sendBeacon(url, JSON.stringify({
+                    source: 'setInterval',
+                    value: input.value,
+                }));
+            }, 1000);
+        });
+    </script>
+</head>
+
+<body>
+    <input>
+</body>
+
+</html>
