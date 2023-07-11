@@ -37,6 +37,7 @@ jobs:
               repo: context.repo.repo,
               release_id: "latest",
             });
+            console.log(result);
             const version = semver.inc(result.data.tag_name, release);
             if (!version) {
               throw Error("Release version could not be generated");
